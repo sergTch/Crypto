@@ -1,0 +1,2 @@
+/usr/bin/ar qc libALGO.a CMakeFiles/ALGO.dir/bin_search.cpp.o CMakeFiles/ALGO.dir/encodings.cpp.o
+/usr/bin/ranlib libALGO.a
