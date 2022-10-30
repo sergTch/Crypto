@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/PROJ.dir/main.cpp.o -o PROJ  algo/libALGO.a cyphers/libCYPHER.a cyphers/caesar/libCAESAR.a numbers/libNUMBERS.a cyphers/RSA/libRSA.a numbers/libNUMBERS.a 
