@@ -1,0 +1,1 @@
+add_library(ALGO bin_search.hpp bin_search.cpp encodings.hpp encodings.cpp visualisation.hpp)

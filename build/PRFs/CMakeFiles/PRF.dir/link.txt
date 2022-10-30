@@ -1,0 +1,2 @@
+/usr/bin/ar qc libPRF.a CMakeFiles/PRF.dir/AES.cpp.o
+/usr/bin/ranlib libPRF.a
