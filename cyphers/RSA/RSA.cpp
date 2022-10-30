@@ -6,7 +6,7 @@ RSA_int::RSA_int(){}
 RSA_int::RSA_int(uint64_t d, uint64_t p, uint64_t q): d(d), p(p), q(q) {
     n = p * q;
     m = (p - 1) * (q - 1);
-    e = inverseByMod(d, m);
+    e = inverseByModGCD(d, m);
 }
 
 RSA_int::RSA_int(uint64_t n, uint64_t e): n(n), e(e){}
