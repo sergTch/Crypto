@@ -8,4 +8,4 @@ add_subdirectory(cyphers)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-target_link_libraries(${PROJECT_NAME} ALGO CYPHER CAESAR NUMBERS RSA)
+target_link_libraries(${PROJECT_NAME} ALGO CYPHER CAESAR NUMBERS RSA ELGAMAL)

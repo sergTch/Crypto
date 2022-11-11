@@ -4,67 +4,64 @@
 
 #include <iostream>
 #include "cyphers/RSA/RSA.hpp"
+#include "cyphers/elgamal/elgamal.hpp"
 #include "numbers/factorization.hpp"
+#include "numbers/discrete_log.hpp"
 #include "algo/encodings.hpp"
+#include "algo/visualisation.hpp"
 #include <string>
 
 using namespace std;
 
 void HW4N1(){
-    uint64_t n = ;
+    uint64_t mod = 113, a = 3, b = 91, t;
 
-    cout << dlog_sheenks(n) << endl;
-    cout << endl;
+    t = dlog_shenks(a, b, mod);
+
+    cout << "\nanswer = " << t << endl;
+    if (binPow(a, t, mod) == b)
+        cout << "done\n";
+    else cout << "wrong :(\n";
 }
 
 void HW4N2(){
-    uint64_t n = 3751785649;
-    uint64_t e = 18181;
-    RSA_int rsa(n, e);
-    rsa.hash = [](uint64_t x) -> uint64_t { return x; };
+    uint64_t mod = 347, a = 3, b = 212, sz = 173, t;
 
-    uint64_t sgn;
-    uint64_t msg = 15881648;
-    cout << "encode: " << msg << " -> " << rsa.encode(msg) << endl << endl;
+    t = dlog_pollard(a, b, mod, sz);
 
-    sgn = 779150153;
-    msg = 8191;
-    cout << "msg: " << msg << " sgn: " << sgn << " correct: " << rsa.checkSign(msg, sgn) << endl;
-    cout << msg << " is 2 ^ 13 - 1 and prime\n";
-
-    sgn = 3720856771;
-    msg = 131071;
-    cout << "msg: " << msg << " sgn: " << sgn << " correct: " << rsa.checkSign(msg, sgn) << endl;
-    cout << msg << " is 2 ^ 17 - 1 and prime\n";
-    
-    sgn = 1777950437;
-    msg = 524287;
-    cout << "msg: " << msg << " sgn: " << sgn << " correct: " << rsa.checkSign(msg, sgn) << endl;
-    cout << msg << " is 2 ^ 19 - 1 and prime\n";
-
-    cout << "\nSo all messages are Mersenne primes\n";
-    cout << endl;
+    cout << "\nanswer = " << t << endl;
+    if (binPow(a, t, mod) == b)
+        cout << "done\n";
+    else cout << "wrong :(\n";
 }
 
 void HW4N3(){
-    uint64_t d = 1653279371;
-    uint64_t p = 60631;
-    uint64_t q = 61879;
-
-    RSA_int rsa(d, p, q);
-    rsa.hash = [](uint64_t x) -> uint64_t { return x; };
-
-    string msg = "CIAO";
-    uint64_t n = mod100askiiEnc(msg);
-
-    cout << msg << " -> " << n << endl;
-    cout << "signature: " << rsa.sign(n) << endl << endl;
+    elgamal cr(6, 229);
+    cr.setPublic(164);
+    cr.evalPrivate();
     
-    uint64_t c = 1113231101;
-    cout << "msg: " << mod100askiiDec(rsa.decode(c)) << " ";
-    c = 917998221;
-    cout << mod100askiiDec(rsa.decode(c)) << endl;
-    cout << endl;
+    cout << "encode 217 with key 20: c1 = ";
+    show(cr.encode({20, 217}), " c2 = ", "\n");
+    cout << "private x: " << cr.getPrivate() << endl;
+
+    cout << "decoded msg: "<< cr.decode({215, 90}).first << endl;
+}
+
+void HW4N4(){
+    elgamal cr(6, 229);
+    cr.setPrivate(81);
+    
+    auto sgn = cr.sign(91, 111);
+
+    cout << "signature for msg 111 is s1 = ";
+    show(sgn, " s2 = ", "\n\ncheck 164 91\n");
+
+    cr.setPublic(78);
+
+    if (cr.checkSign(111, {164, 91}))
+        cout << "so 164 91 is a valid signature\n";
+    else
+        cout << "so 164 91 is not a valid signature\n";
 }
 
 #endif

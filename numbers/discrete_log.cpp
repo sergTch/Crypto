@@ -22,16 +22,16 @@ uint64_t dlog_shenks(uint64_t a, uint64_t b, uint64_t mod) {
 
     sort(table.begin(), table.end());
 
-    cout << "m = " << m << endl << endl;
-    show(table, "\n");
-    cout << "a^-m = " << am << endl << endl;
+    // cout << "m = " << m << endl << endl;
+    // show(table, "\n");
+    // cout << "a^-m = " << am << endl << endl;
 
     auto find = [&table, &b](int64_t idx) {
         return table[idx].first <= b;
     };
     
     for (int i = 0; i < m; i++){
-        cout << b << endl;
+        // cout << b << endl;
         t = bin_search(0, m, find);
         if (table[t].first == b)
             return i * m + table[t].second;
@@ -44,6 +44,9 @@ uint64_t dlog_shenks(uint64_t a, uint64_t b, uint64_t mod) {
 uint64_t dlog_pollard(uint64_t a, uint64_t b, uint64_t mod, uint64_t sz){
     int64_t x = 1, pa = 0, pb = 0;
     int64_t x2 = 1, pa2 = 0, pb2 = 0;
+
+    if (!sz)
+        sz = mod - 1;
 
     auto next = [&a, &b, &mod, &sz](int64_t& x, int64_t& pa, int64_t& pb) {
         switch (x % 3)
@@ -71,7 +74,7 @@ uint64_t dlog_pollard(uint64_t a, uint64_t b, uint64_t mod, uint64_t sz){
         next(x2, pa2, pb2);
         next(x2, pa2, pb2);
 
-        cout << x << " " << pa << " " << pb << "\t<--->\t";
+        cout << x << " " << pa << " " << pb << "  \t<--->\t    ";
         cout << x2 << " " << pa2 << " " << pb2 << endl;
 
         if (x == x2){
@@ -82,6 +85,6 @@ uint64_t dlog_pollard(uint64_t a, uint64_t b, uint64_t mod, uint64_t sz){
             return 0;
         }
     }
-    
+
     return 0;
 }
