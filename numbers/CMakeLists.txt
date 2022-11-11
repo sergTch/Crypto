@@ -1,1 +1,1 @@
-add_library(NUMBERS factorization.cpp factorization.hpp)
+add_library(NUMBERS factorization.cpp factorization.hpp discrete_log.cpp discrete_log.hpp)

@@ -89,6 +89,11 @@ int64_t inverseByMod(int64_t x, int64_t mod, map<int64_t, int64_t> *modPrimes)
 	return binPow(x, eulerFunc(mod, modPrimes) - 1, mod);
 }
 
+int64_t inverseByPrimeMod(int64_t x, int64_t mod)
+{
+	return binPow(x, mod - 2, mod);
+}
+
 int64_t inverseByModGCD(int64_t x, int64_t mod)
 {
 	stack<int64_t> st;

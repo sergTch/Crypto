@@ -15,7 +15,7 @@ void RSA_int::setPrivate(){
     p = factor_pollard(n);
     q = n / p;
     m = (p - 1) * (q - 1);
-    d = inverseByMod(e, m);
+    d = inverseByModGCD(e, m);
 }
 
 uint64_t RSA_int::getPublicE() { return e; };
